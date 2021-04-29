@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,40 +10,16 @@ export class BookListComponent implements OnInit {
 
 
 
-    books: Array<any> = [
-
-      {
-      "Id":1,
-      "Name":"Book2",
-      "Type":"Type2",
-      "Price":250
-      },
-
-      {
-        "Id":2,
-        "Name":"Book3",
-        "Type":"Type3",
-        "Price":250
-        },
-
-      {
-      "Id":3,
-      "Name":"Book4",
-      "Type":"Type4",
-      "Price":250
-      },
-      {
-        "Id":4,
-        "Name":"Book5",
-        "Type":"Type5",
-        "Price":250
-        },
-
-]
-
-  constructor() { }
+    books: any ;
+  constructor(private http:HttpClient) { }
 
   ngOnInit(): void {
+    this.http.get('data/bookdb.json').subscribe(
+      data=>{
+        this.books=data;
+        console.log(data);
+      }
+    );
   }
 
 }
